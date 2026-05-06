@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="NRB Projects — Brisbane's Best' " />
+    <title>{% block title %}NRB Projects — Brisbane Construction{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v='20260506d') }}" />
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header class="site-header" id="site-header">
+        <nav class="nav-inner">
+            <a href="{{ url_for('index') }}" class="nav-logo">
+                <span class="logo-text">NRB Projects<span class="logo-dot">.</span></span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="{{ url_for('index') }}" {% if request.endpoint =='index' %}class="active" {% endif %}>Home</a></li>
+                <li><a href="{{ url_for('projects') }}" {% if request.endpoint =='projects' %}class="active" {% endif %}>Projects</a></li>
+                <li><a href="#drone">Drone Footage</a></li>
+                <li><a href="{{ url_for('contact') }}" {% if request.endpoint =='contact' %}class="active" {% endif %}>Contact</a></li>
+                <li><a href="{{ url_for('quote') }}" class="nav-cta {% if request.endpoint == 'quote' %}active{% endif %}">Make an Enquiry</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for msg in messages %}
+    {% if msg == 'success' %}
+    <div class="flash flash--success"><i class="fa-solid fa-circle-check"></i> Submitted successfully — we'll be in touch soon!</div>
+    {% else %}
+    <div class="flash flash--error"><i class="fa-solid fa-triangle-exclamation"></i> {{ msg }}</div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <main>{% block content %}{% endblock %}</main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-text">NRB Projects<span class="logo-dot">.</span></span>
+                <p>Building Brisbane's future.<br>Quality construction you can trust.</p>
+                <div class="footer-social">
+                    <a href="https://instagram.com/nrb_projects" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://facebook.com/nrbprojects" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('projects') }}">Projects</a></li>
+                    <li><a href="{{ url_for('quote') }}">Make an Enquiry</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Get in Touch</h4>
+                <ul>
+                    <li><i class="fa-solid fa-phone"></i> <a href="tel:+61432299083">0432 299 083</a></li>
+                    <li><i class="fa-solid fa-envelope"></i> <a href="mailto:reece@nrbprojects.com">reece@nrbprojects.com</a></li>
+                    <li><i class="fa-solid fa-location-dot"></i> Brisbane, QLD, Australia</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 NRB Projects Pty Ltd. All rights reserved. | Brisbane, QLD</p>
+        </div>
+    </footer>
+
+    <button class="chatbot-trigger" id="chatbotTrigger" aria-label="Open quick questions">
+        <i class="fa-solid fa-comments"></i>
+        <span>Quick Questions</span>
+    </button>
+
+    <aside class="chatbot-panel" id="chatbotPanel" aria-hidden="true">
+        <div class="chatbot-head">
+            <strong>NRB Assistant</strong>
+            <button id="chatbotClose" aria-label="Close assistant"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <p class="chatbot-intro">Ask a quick question:</p>
+        <div class="chatbot-messages" id="chatbotMessages"></div>
+        <div class="chatbot-questions" id="chatbotQuestions"></div>
+    </aside>
+
+    <script src="{{ url_for('static', filename='js/main.js', v='20260506d') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

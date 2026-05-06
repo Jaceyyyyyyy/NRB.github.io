@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} — NRB Projects{% endblock %}
+
+{% block content %}
+<section class="thanks-section">
+    <div class="container container--narrow thanks-inner">
+        <div class="thanks-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h1>{{ title }}</h1>
+        <p>{{ message }}</p>
+        <div class="thanks-actions">
+            <a href="{{ url_for('index') }}" class="btn btn--primary">Back to Home</a>
+            <a href="{{ url_for('projects') }}" class="btn btn--ghost">View Our Work</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

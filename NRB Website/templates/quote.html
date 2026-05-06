@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Request a Quote — NRB Projects Brisbane{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+    <div class="container">
+        <p class="section-pre">Free & Obligation-Free</p>
+        <h1 class="page-hero-title">Make an Enquiry</h1>
+        <p class="page-hero-desc">Tell us about your project and we'll get back to you within 1–2 business days.</p>
+    </div>
+</section>
+
+<section class="form-section section-pad">
+    <div class="container container--narrow">
+
+        <div class="secure-badge">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Your information is kept private and never shared with third parties.</span>
+        </div>
+
+        <form method="POST" action="{{ url_for('quote') }}" class="nrb-form" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="form-row">
+                <div class="form-group {% if form.name.errors %}has-error{% endif %}">
+                    {{ form.name.label }}
+                    {{ form.name(placeholder="Your full name") }}
+                    {% for e in form.name.errors %}<span class="form-error">{{ e }}</span>{% endfor %}
+                </div>
+                <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+                    {{ form.email.label }}
+                    {{ form.email(placeholder="your@email.com") }}
+                    {% for e in form.email.errors %}<span class="form-error">{{ e }}</span>{% endfor %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group {% if form.phone.errors %}has-error{% endif %}">
+                    {{ form.phone.label }}
+                    {{ form.phone(placeholder="04XX XXX XXX") }}
+                    {% for e in form.phone.errors %}<span class="form-error">{{ e }}</span>{% endfor %}
+                </div>
+                <div class="form-group {% if form.project_type.errors %}has-error{% endif %}">
+                    {{ form.project_type.label }}
+                    {{ form.project_type() }}
+                    {% for e in form.project_type.errors %}<span class="form-error">{{ e }}</span>{% endfor %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group {% if form.location.errors %}has-error{% endif %}">
+                    {{ form.location.label }}
+                    {{ form.location(placeholder="e.g. Ascot, Brisbane") }}
+                    {% for e in form.location.errors %}<span class="form-error">{{ e }}</span>{% endfor %}
+                </div>
+                <div class="form-group {% if form.budget_range.errors %}has-error{% endif %}">
+                    {{ form.budget_range.label }}
+                    {{ form.budget_range() }}
+                    {% for e in form.budget_range.errors %}<span class="form-error">{{ e }}</span>{% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group {% if form.description.errors %}has-error{% endif %}">
+                {{ form.description.label }}
+                {{ form.description(placeholder="Describe your project — size, scope, timeline, any specifics...", rows=6) }}
+                {% for e in form.description.errors %}<span class="form-error">{{ e }}</span>{% endfor %}
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--full">
+                <i class="fa-solid fa-paper-plane"></i> Submit Quote Request
+            </button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
