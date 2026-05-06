@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Our Projects — NRB Projects Brisbane{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+    <div class="container">
+        <p class="section-pre">Portfolio</p>
+        <h1 class="page-hero-title">Our Work</h1>
+        <p class="page-hero-desc">Every project tells a story. Here's ours — residential, commercial and civil works across Greater Brisbane.</p>
+    </div>
+</section>
+
+<!-- Filter tabs -->
+<section class="projects-section section-pad">
+    <div class="container">
+        <div class="filter-tabs">
+            <a href="{{ url_for('projects') }}?category=all" class="filter-tab {% if active_category == 'all' %}active{% endif %}">All</a>
+            <a href="{{ url_for('projects') }}?category=residential" class="filter-tab {% if active_category == 'residential' %}active{% endif %}">Residential</a>
+            <a href="{{ url_for('projects') }}?category=commercial" class="filter-tab {% if active_category == 'commercial' %}active{% endif %}">Commercial</a>
+            <a href="{{ url_for('projects') }}?category=civil" class="filter-tab {% if active_category == 'civil' %}active{% endif %}">Civil</a>
+        </div>
+
+        {% if projects %}
+        <div class="project-grid project-grid--full">
+            {% for p in projects %}
+            <article class="project-card">
+                <div class="project-img-wrap">
+                    <img src="{{ url_for('static', filename='images/' + p.image) }}"
+                         alt="{{ p.title }}"
+                         class="project-img"
+                         onerror="this.parentElement.classList.add('no-img')" />
+                    <div class="project-overlay">
+                        <span class="project-cat">{{ p.category }}</span>
+                        <span class="project-year">{{ p.year }}</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">{{ p.title }}</h3>
+                    <p class="project-loc"><i class="fa-solid fa-location-dot"></i> {{ p.location }}</p>
+                    <p class="project-desc">{{ p.description }}</p>
+                    <div class="project-tags">
+                        {% for tag in p.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="no-results">No projects in this category yet — check back soon.</p>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

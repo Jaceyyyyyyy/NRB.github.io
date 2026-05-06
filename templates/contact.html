@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Contact Us — NRB Projects Brisbane{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+    <div class="container">
+        <p class="section-pre">Say Hello</p>
+        <h1 class="page-hero-title">Contact Us</h1>
+        <p class="page-hero-desc">Got a question? We'd love to hear from you.</p>
+    </div>
+</section>
+
+<section class="contact-section section-pad">
+    <div class="container contact-layout">
+
+        <!-- Contact details -->
+        <div class="contact-info">
+            <h2>Get in Touch</h2>
+            <ul class="contact-list">
+                <li>
+                    <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div>
+                        <strong>Phone</strong>
+                        <!-- Replace with real number -->
+                        <a href="tel:+61432299083">0432 299 083</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div>
+                        <strong>Email</strong>
+                        <!-- Replace with real email -->
+                        <a href="mailto:reece@nrbprojects.com">reece@nrbprojects.com</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div>
+                        <strong>Location</strong>
+                        <span>Brisbane, QLD, Australia</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="contact-icon"><i class="fa-solid fa-clock"></i></div>
+                    <div>
+                        <strong>Business Hours</strong>
+                        <span>Mon – Fri: 7am – 4pm</span>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="contact-social">
+                <a href="https://instagram.com/nrb_projects" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://facebook.com/nrbprojects" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-facebook-f"></i> Facebook
+                </a>
+            </div>
+        </div>
+
+        <!-- Contact form -->
+        <div class="contact-form-wrap">
+            <div class="secure-badge">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Your information is kept private and never shared.</span>
+            </div>
+
+            <form method="POST" action="{{ url_for('contact') }}" class="nrb-form" novalidate>
+                {{ form.hidden_tag() }}
+
+                <div class="form-group {% if form.name.errors %}has-error{% endif %}">
+                    {{ form.name.label }}
+                    {{ form.name(placeholder="Your full name") }}
+                    {% for e in form.name.errors %}<span class="form-error">{{ e }}</span>{% endfor %}
+                </div>
+
+                <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+                    {{ form.email.label }}
+                    {{ form.email(placeholder="your@email.com") }}
+                    {% for e in form.email.errors %}<span class="form-error">{{ e }}</span>{% endfor %}
+                </div>
+
+                <div class="form-group {% if form.phone.errors %}has-error{% endif %}">
+                    {{ form.phone.label }}
+                    {{ form.phone(placeholder="04XX XXX XXX (optional)") }}
+                    {% for e in form.phone.errors %}<span class="form-error">{{ e }}</span>{% endfor %}
+                </div>
+
+                <div class="form-group {% if form.message.errors %}has-error{% endif %}">
+                    {{ form.message.label }}
+                    {{ form.message(placeholder="How can we help?", rows=5) }}
+                    {% for e in form.message.errors %}<span class="form-error">{{ e }}</span>{% endfor %}
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--full">
+                    <i class="fa-solid fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

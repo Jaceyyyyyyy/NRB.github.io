@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% block title %}NRB Projects — Brisbane Construction Company{% endblock %}
+
+{% block content %}
+
+<!-- ── Hero ── -->
+<section class="hero">
+    <div class="hero-bg">
+        <video class="hero-video" autoplay muted loop playsinline poster="{{ url_for('static', filename='images/hero.jpg') }}">
+            <source src="{{ url_for('static', filename='videos/hero-drone.mp4') }}" type="video/mp4">
+        </video>
+        <div class="hero-video-placeholder" id="heroVideoPlaceholder">
+            <i class="fa-solid fa-film"></i>
+            <span>Drone Video Placeholder - add `static/videos/hero-drone.mp4`</span>
+        </div>
+        <!-- Replace with your actual hero/drone image -->
+        <img src="{{ url_for('static', filename='images/hero.jpg') }}" alt="NRB Projects construction site" class="hero-img" onerror="this.style.display='none'" />
+        <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+        <p class="hero-pre">Brisbane Construction</p>
+        <h1 class="hero-title">
+            Built<br>
+            <span class="hero-title--outline">Different.</span>
+        </h1>
+        <p class="hero-sub">
+            NRB Projects delivers residential, commercial and civil construction across Greater Brisbane — on time, on budget, no compromises.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ url_for('quote') }}" class="btn btn--primary">Request a Quote</a>
+            <a href="{{ url_for('projects') }}" class="btn btn--ghost">View Our Work</a>
+        </div>
+    </div>
+    <div class="hero-scroll-hint">
+        <span>Scroll</span>
+        <i class="fa-solid fa-arrow-down"></i>
+    </div>
+</section>
+
+<!-- ── Stats strip ── -->
+<section class="stats-strip">
+    <div class="stats-inner">
+        <div class="stat">
+            <span class="stat-num">50+</span>
+            <span class="stat-label">Projects Completed</span>
+        </div>
+        <div class="stat">
+            <span class="stat-num">10+</span>
+            <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">Client Satisfaction</span>
+        </div>
+        <div class="stat">
+            <span class="stat-num">BNE</span>
+            <span class="stat-label">Based in Brisbane</span>
+        </div>
+    </div>
+</section>
+
+<!-- ── Services ── -->
+<section class="services section-pad">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-pre">What We Do</p>
+            <h2 class="section-title">End-to-End Construction</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-house"></i></div>
+                <h3>Residential</h3>
+                <p>New builds, renovations, extensions and Queenslander restorations — crafted for Brisbane living.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-building"></i></div>
+                <h3>Commercial</h3>
+                <p>Office fit-outs, retail, industrial and mixed-use developments delivered to the highest standard.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-road"></i></div>
+                <h3>Civil Works</h3>
+                <p>Site preparation, retaining walls, drainage and infrastructure for developments of all scales.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-helmet-safety"></i></div>
+                <h3>Project Management</h3>
+                <p>Full project oversight from DA approval through to handover — one point of contact, zero surprises.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Featured Projects ── -->
+<section class="featured-projects section-pad section-pad--dark">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-pre">Our Work</p>
+            <h2 class="section-title">Featured Projects</h2>
+        </div>
+        <div class="project-grid">
+            {% for p in projects %}
+            <article class="project-card">
+                <div class="project-img-wrap">
+                    <img src="{{ url_for('static', filename='images/' + p.image) }}"
+                         alt="{{ p.title }}"
+                         class="project-img"
+                         onerror="this.parentElement.classList.add('no-img')" />
+                    <div class="project-overlay">
+                        <span class="project-cat">{{ p.category }}</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">{{ p.title }}</h3>
+                    <p class="project-loc"><i class="fa-solid fa-location-dot"></i> {{ p.location }}</p>
+                    <p class="project-desc">{{ p.description }}</p>
+                    <div class="project-tags">
+                        {% for tag in p.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        <div class="section-cta">
+            <a href="{{ url_for('projects') }}" class="btn btn--primary">View All Projects</a>
+        </div>
+    </div>
+</section>
+
+<!-- ── Drone Footage ── -->
+<section class="drone-section section-pad" id="drone">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-pre">Aerial View</p>
+            <h2 class="section-title">Drone Footage</h2>
+            <p class="section-desc">See our projects from a new perspective. Captured by our in-house drone team.</p>
+        </div>
+        <div class="drone-grid">
+            <!--
+              INSTRUCTIONS: Paste your YouTube or Vimeo embed links below.
+              Replace the src values with your actual video embed URLs.
+              Example YouTube embed: https://www.youtube.com/embed/YOUR_VIDEO_ID
+            -->
+            <div class="drone-video">
+                <div class="video-placeholder">
+                    <i class="fa-solid fa-circle-play"></i>
+                    <p>Add your drone video embed here</p>
+                    <!-- Uncomment and replace with your embed:
+                    <iframe
+                      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                      title="NRB Projects Drone Footage"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen>
+                    </iframe>
+                    -->
+                </div>
+            </div>
+            <div class="drone-video">
+                <div class="video-placeholder">
+                    <i class="fa-solid fa-circle-play"></i>
+                    <p>Add your second drone video here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Instagram ── -->
+<section class="insta-section section-pad section-pad--dark">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-pre">Follow Along</p>
+            <h2 class="section-title">@nrbprojects</h2>
+            <p class="section-desc">Follow us on Instagram for site updates, behind-the-scenes and completed project reveals.</p>
+        </div>
+        <div class="insta-cta-wrap">
+            <!-- Replace with your actual Instagram URL -->
+            <a href="https://instagram.com/nrb_projects" target="_blank" rel="noopener noreferrer" class="insta-btn">
+                <i class="fa-brands fa-instagram"></i>
+                Follow on Instagram
+            </a>
+        </div>
+        <!--
+          TIP: For an embedded Instagram feed, sign up for a free service like
+          Elfsight (elfsight.com) or SnapWidget (snapwidget.com) and paste
+          their embed code below.
+        -->
+    </div>
+</section>
+
+<!-- ── CTA Banner ── -->
+<section class="cta-banner">
+    <div class="cta-inner">
+        <h2>Ready to build something great?</h2>
+        <p>Get your obligation-free quote from Brisbane's trusted construction team.</p>
+        <a href="{{ url_for('quote') }}" class="btn btn--primary btn--lg">Request a Quote</a>
+    </div>
+</section>
+
+{% endblock %}

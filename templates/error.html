@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Error {{ code }} — NRB Projects{% endblock %}
+
+{% block content %}
+<section class="thanks-section">
+    <div class="container container--narrow thanks-inner">
+        <div class="error-code">{{ code }}</div>
+        <h1>Oops.</h1>
+        <p>{{ message }}</p>
+        <div class="thanks-actions">
+            <a href="{{ url_for('index') }}" class="btn btn--primary">Back to Home</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
